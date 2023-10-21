@@ -18,11 +18,6 @@ import javax.inject.Inject
 class HomeViewModel
     @Inject constructor(val repository: GameRepository): ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
-
     private var _games = MutableStateFlow(listOf<Game>())
     val games : Flow<List<Game>> = _games
 
@@ -32,11 +27,7 @@ class HomeViewModel
             repository.allGames.collect {
                 Log.d("JGTN", "l: $it")
                 _games.value = it
-                if (it.isEmpty()) {
-                    _text.value = "nada :("
-                } else {
-                    _text.value = it.map { g -> g.name }.joinToString()
-                }
+
             }
         }
     }

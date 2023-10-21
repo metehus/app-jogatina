@@ -9,12 +9,32 @@
         android:id="@+id/navigation_home"
         android:name="dev.matehus.appjogatina.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/actionHomeOpenGameDetails"
+            app:destination="@id/gameDetailsFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_createGameFragment"
+            app:destination="@id/createGameFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_library"
-        android:name="dev.matehus.appjogatina.ui.library.LibraryFragment"
-        android:label="@string/title_library"
-        tools:layout="@layout/fragment_library" />
+        android:id="@+id/gameDetailsFragment"
+        android:name="dev.matehus.appjogatina.ui.details.GameDetailsFragment"
+        android:label="fragment_game_details"
+        tools:layout="@layout/fragment_game_details" >
+        <action
+            android:id="@+id/action_gameDetailsFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/createGameFragment"
+        android:name="dev.matehus.appjogatina.ui.create.CreateGameFragment"
+        android:label="fragment_create_game"
+        tools:layout="@layout/fragment_create_game" >
+        <action
+            android:id="@+id/action_createGameFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
 </navigation>

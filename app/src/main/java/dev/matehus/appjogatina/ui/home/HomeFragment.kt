@@ -5,16 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.matehus.appjogatina.databinding.FragmentHomeBinding
-import kotlinx.coroutines.flow.collect
+import dev.matehus.appjogatina.ui.GameListAdapter
+import dev.matehus.appjogatina.ui.details.GameDetailsViewModel
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -31,16 +31,21 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val homeViewModel by activityViewModels<HomeViewModel>()
+        val gameDetailsViewModel by activityViewModels<GameDetailsViewModel>()
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        binding.floatingActionButton.setOnClickListener {
+            val action = HomeFragmentDirections.actionNavigationHomeToCreateGameFragment()
+            findNavController().navigate(action)
+        }
+
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeViewModel.games.collect {
-                    Log.i("JGTN", "asdasdasdasdasda, a: ${it.size} $it")
-                    binding.gamesList.adapter = HomeGameListAdapter(it, homeViewModel)
+                homeViewModel.games.collect { Log.i("JGTN", "asdasdasdasdasda, a: ${it.size} $it")
+                    binding.gamesList.adapter = GameListAdapter(it, gameDetailsViewModel)
                     binding.gamesList.layoutManager = LinearLayoutManager(context)
                 }
             }

@@ -3,4 +3,10 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Início</string>
     <string name="title_library">Biblioteca</string>
+
+    <string-array name="game_status_list">
+        <item>Não jogado</item>
+        <item>Interessado</item>
+        <item>Jogado</item>
+    </string-array>
 </resources>

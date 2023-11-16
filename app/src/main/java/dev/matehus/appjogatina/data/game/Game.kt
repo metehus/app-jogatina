@@ -12,7 +12,9 @@ enum class GameStatus (val colorId: Int) {
 
 @Entity(tableName = "games")
 data class Game(
-    var id: String?,
+    @PrimaryKey
+    val id: Int?,
+    var docId: String?,
     val name: String,
     val imageUrl: String?,
     var addedToLibrary: Boolean,
@@ -21,8 +23,19 @@ data class Game(
 ) {
     constructor(name: String, imageUrl: String?) : this(
         null,
+        null,
         name,
         imageUrl,
+        false,
+        GameStatus.NotPlayed,
+        null
+    )
+
+    constructor() : this(
+        null,
+        null,
+        "default",
+        null,
         false,
         GameStatus.NotPlayed,
         null
@@ -31,6 +44,7 @@ data class Game(
     fun clone(): Game {
         return Game(
             this.id,
+            this.docId,
             this.name,
             this.imageUrl,
             this.addedToLibrary,

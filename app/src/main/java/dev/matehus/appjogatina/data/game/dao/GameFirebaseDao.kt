@@ -19,7 +19,7 @@ class GameFirebaseDao : GameDao {
         return gamesCollection.snapshots().map {
             return@map it.documents.mapNotNull { doc ->
                 val game = doc.toObject<Game>()
-                game?.id = doc.id
+                game?.docId = doc.id
                 game
             }
         }
@@ -32,10 +32,10 @@ class GameFirebaseDao : GameDao {
     }
 
     override suspend fun insert(game: Game) {
-        gamesCollection.document(game.id.toString()!!).set(game)
+        gamesCollection.document().set(game)
     }
 
     override suspend fun update(game: Game) {
-        gamesCollection.document(game.id.toString()!!).set(game)
+        gamesCollection.document(game.docId!!).set(game)
     }
 }

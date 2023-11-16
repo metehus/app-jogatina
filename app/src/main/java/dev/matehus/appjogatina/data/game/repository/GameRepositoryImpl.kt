@@ -17,18 +17,14 @@ class GameRepositoryImpl
      @Inject constructor (private val firebaseDao: GameFirebaseDao, private val roomDao: GameRoomDao) : GameRepository {
 
     override val allGames: Flow<List<Game>>
-        get() = firebaseDao.listAll().catch {
-            emitAll(roomDao.listAll())
-        }
+        get() = firebaseDao.listAll()
 
     override suspend fun getGameById(id: Int): Flow<Game?> {
-        return firebaseDao.getGame(id).catch {
-            emitAll(roomDao.getGame(id))
-        }
+        return firebaseDao.getGame(id)
     }
 
     override suspend fun upsert(game: Game) {
-        if (game.id.isNullOrEmpty()) {
+        if (game.docId.isNullOrEmpty()) {
             roomDao.insert(game)
             firebaseDao.insert(game)
         } else {

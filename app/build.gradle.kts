@@ -5,6 +5,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
 
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -64,6 +65,9 @@ dependencies {
     ksp("com.google.dagger:hilt-compiler:2.47")
 
     implementation("io.coil-kt:coil:2.4.0")
+
+    implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
+    implementation("com.google.firebase:firebase-firestore")
 
 
     testImplementation("junit:junit:4.13.2")

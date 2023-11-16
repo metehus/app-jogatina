@@ -12,8 +12,7 @@ enum class GameStatus (val colorId: Int) {
 
 @Entity(tableName = "games")
 data class Game(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int?,
+    var id: String?,
     val name: String,
     val imageUrl: String?,
     var addedToLibrary: Boolean,

@@ -8,13 +8,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
-import dev.matehus.appjogatina.data.game.GameRepository
+import dev.matehus.appjogatina.data.game.repository.GameRepository
 import dev.matehus.appjogatina.data.game.sampleGameList
 import dev.matehus.appjogatina.databinding.ActivityMainBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

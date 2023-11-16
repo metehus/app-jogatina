@@ -5,11 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import dev.matehus.appjogatina.data.game.Game
-import dev.matehus.appjogatina.data.game.GameDao
+import dev.matehus.appjogatina.data.game.dao.GameRoomDao
 
-@Database(entities = [Game::class], version = 1)
+@Database(entities = [Game::class], version = 1, exportSchema = false)
 abstract class LocalDatabase: RoomDatabase() {
-    abstract fun gameDao(): GameDao
+    abstract fun gameDao(): GameRoomDao
 
     companion object{
 

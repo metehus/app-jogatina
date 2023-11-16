@@ -15,7 +15,6 @@ import androidx.navigation.fragment.navArgs
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import dev.matehus.appjogatina.R
-import dev.matehus.appjogatina.data.game.GameRepository
 import dev.matehus.appjogatina.data.game.GameStatus
 import dev.matehus.appjogatina.databinding.FragmentGameDetailsBinding
 import kotlinx.coroutines.launch

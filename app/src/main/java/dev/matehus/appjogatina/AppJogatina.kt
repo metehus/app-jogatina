@@ -9,9 +9,10 @@ import dagger.hilt.android.HiltAndroidApp
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dev.matehus.appjogatina.data.LocalDatabase
-import dev.matehus.appjogatina.data.game.GameDao
-import dev.matehus.appjogatina.data.game.GameRepository
-import dev.matehus.appjogatina.data.game.GameRepositoryLocal
+import dev.matehus.appjogatina.data.game.dao.GameFirebaseDao
+import dev.matehus.appjogatina.data.game.dao.GameRoomDao
+import dev.matehus.appjogatina.data.game.repository.GameRepository
+import dev.matehus.appjogatina.data.game.repository.GameRepositoryImpl
 import javax.inject.Singleton
 
 @Module
@@ -23,8 +24,11 @@ class AppJogatina: Application() {
     fun provideLocalDatabase(@ApplicationContext ctx: Context) = LocalDatabase.get(ctx)
 
     @Provides
-    fun provideGameDao(database: LocalDatabase) = database.gameDao()
+    fun provideGameRoomDao(database: LocalDatabase) = database.gameDao()
 
     @Provides
-    fun provideGameRepository(gameDao: GameDao): GameRepository = GameRepositoryLocal(gameDao)
+    fun provideGameFirebaseDao() = GameFirebaseDao()
+
+    @Provides
+    fun provideGameRepository(gameRoomDao: GameRoomDao, firebaseDao: GameFirebaseDao): GameRepository = GameRepositoryImpl(firebaseDao, gameRoomDao)
 }
